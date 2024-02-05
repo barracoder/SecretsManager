@@ -15,10 +15,11 @@ public class SecretsManager
     }
 
     public IDictionary<string,ISecretSource> SecretSources { get => _secretSources; }
+    public ISecretSource DefaultSecretSource { get => _defaultSecretSource; }
 
     public void RegisterSecretSource(string key, ISecretSource customSecretSource, bool isDefault = false)
     {
-        if (isDefault)
+        if (isDefault || _defaultSecretSource == null)
         {
             _defaultSecretSource = customSecretSource;
         }
